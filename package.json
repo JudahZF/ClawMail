@@ -10,12 +10,25 @@
   },
   "scripts": {
     "check": "tsc --noEmit",
-    "build": "tsc",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "test": "vitest run"
   },
   "keywords": ["openclaw", "plugin", "email", "gmail", "outlook", "icloud"],
-  "author": "",
+  "author": "Judah Fuller",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@codeberg.org/JudahZF/clawmail.git"
+  },
+  "bugs": {
+    "url": "https://codeberg.org/JudahZF/clawmail/issues"
+  },
+  "homepage": "https://codeberg.org/JudahZF/clawmail",
+  "files": [
+    "dist/src",
+    "README.md",
+    "LICENSE"
+  ],
   "packageManager": "pnpm@10.15.1",
   "dependencies": {
     "@azure/msal-node": "^5.2.0",

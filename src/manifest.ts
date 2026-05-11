@@ -12,7 +12,7 @@ export const toolNames = [
 
 export const manifest = {
   name: "clawmail",
-  version: "0.1.0",
+  version: "1.0.0",
   description: "Secure OpenClaw email plugin for read, organize, and draft-only workflows.",
   contracts: { tools: [...toolNames] },
 };
