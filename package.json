@@ -24,6 +24,14 @@
     "url": "https://codeberg.org/JudahZF/clawmailreader/issues"
   },
   "homepage": "https://codeberg.org/JudahZF/clawmailreader",
+  "openclaw": {
+    "compat": {
+      "pluginApi": "1.0.0"
+    },
+    "build": {
+      "openclawVersion": "1.0.0"
+    }
+  },
   "files": [
     "dist/src",
     "openclaw.plugin.json",

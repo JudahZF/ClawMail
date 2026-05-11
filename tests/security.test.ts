@@ -1,6 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import packageJson from "../package.json" with { type: "json" };
 import { manifest } from "../src/manifest.js";
 import { toolJsonSchemas } from "../src/schemas/tools.js";
 
@@ -26,6 +27,11 @@ describe("safety boundary", () => {
       "clawmailreader_create_draft",
       "clawmailreader_update_draft",
     ]);
+  });
+
+  it("includes required OpenClaw package metadata", () => {
+    expect(packageJson.openclaw.compat.pluginApi).toBe("1.0.0");
+    expect(packageJson.openclaw.build.openclawVersion).toBe("1.0.0");
   });
 
   it("keeps the published OpenClaw manifest in sync with the runtime manifest", async () => {
