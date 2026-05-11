@@ -1,5 +1,5 @@
 {
-  "name": "clawmailreader",
+  "name": "@JudahZF/clawmailreader",
   "version": "1.0.0",
   "description": "Secure OpenClaw email plugin for read, organize, and draft-only workflows.",
   "type": "module",
