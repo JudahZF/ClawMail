@@ -55,7 +55,7 @@ export const uiHints = {
 export const manifest = {
   id: "clawmailreader",
   name: "ClawMailReader",
-  version: "1.0.0",
+  version: "1.1.0",
   description: "Secure email plugin for read, organize, and draft-only workflows across Gmail, Outlook, and iCloud.",
   main: "dist/src/index.js",
   contracts: { tools: [...toolNames] },
