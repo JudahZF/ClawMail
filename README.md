@@ -1,24 +1,24 @@
-# clawmail
+# clawmailreader
 
 Secure OpenClaw email plugin for read, organize, and draft-only workflows across Gmail, Outlook, and iCloud.
 
 ## Exposed tools
 
-- `clawmail_list_accounts`
-- `clawmail_list_folders`
-- `clawmail_create_folder`
-- `clawmail_search_email`
-- `clawmail_get_email`
-- `clawmail_move_email`
-- `clawmail_archive_email`
-- `clawmail_create_draft`
-- `clawmail_update_draft`
+- `clawmailreader_list_accounts`
+- `clawmailreader_list_folders`
+- `clawmailreader_create_folder`
+- `clawmailreader_search_email`
+- `clawmailreader_get_email`
+- `clawmailreader_move_email`
+- `clawmailreader_archive_email`
+- `clawmailreader_create_draft`
+- `clawmailreader_update_draft`
 
 No send, trash, or delete tools are registered.
 
 ## Configuration
 
-Create `clawmail.config.json` or set `CLAWMAIL_CONFIG`:
+Create `clawmailreader.config.json` or set `CLAWMAILREADER_CONFIG`:
 
 ```json
 {
@@ -49,7 +49,7 @@ Secrets are read from the OS keychain first, with environment variable overrides
 
 ```sh
 pnpm build
-clawmail set-secret <account-id> <secret-name> <value>
+clawmailreader set-secret <account-id> <secret-name> <value>
 ```
 
 Common secret names:
@@ -88,7 +88,7 @@ Use an Apple app-specific password. IMAP defaults to `imap.mail.me.com:993`.
 ## Environment secret override format
 
 ```sh
-CLAWMAIL_<ACCOUNT_ID>_<SECRET_NAME>=...
+CLAWMAILREADER_<ACCOUNT_ID>_<SECRET_NAME>=...
 ```
 
 Non-alphanumeric characters in the account id or secret name are converted to underscores and uppercased.
@@ -96,13 +96,13 @@ Non-alphanumeric characters in the account id or secret name are converted to un
 Example:
 
 ```sh
-CLAWMAIL_PERSONAL_GMAIL_GMAIL_REFRESH_TOKEN=...
+CLAWMAILREADER_PERSONAL_GMAIL_GMAIL_REFRESH_TOKEN=...
 ```
 
 ## Storage
 
-- Audit log: `.clawmail/audit.log` or `CLAWMAIL_AUDIT_LOG`
-- Draft ownership store: `.clawmail/drafts.json` or `CLAWMAIL_DRAFT_STORE`
+- Audit log: `.clawmailreader/audit.log` or `CLAWMAILREADER_AUDIT_LOG`
+- Draft ownership store: `.clawmailreader/drafts.json` or `CLAWMAILREADER_DRAFT_STORE`
 
 Draft updates are restricted to drafts this plugin created.
 
@@ -120,22 +120,22 @@ Draft updates are restricted to drafts this plugin created.
 {
   tools: {
     allow: [
-      "clawmail_list_accounts",
-      "clawmail_list_folders",
-      "clawmail_create_folder",
-      "clawmail_search_email",
-      "clawmail_get_email",
-      "clawmail_move_email",
-      "clawmail_archive_email",
-      "clawmail_create_draft",
-      "clawmail_update_draft"
+      "clawmailreader_list_accounts",
+      "clawmailreader_list_folders",
+      "clawmailreader_create_folder",
+      "clawmailreader_search_email",
+      "clawmailreader_get_email",
+      "clawmailreader_move_email",
+      "clawmailreader_archive_email",
+      "clawmailreader_create_draft",
+      "clawmailreader_update_draft"
     ],
     deny: [
-      "clawmail_send_email",
-      "clawmail_send_draft",
-      "clawmail_delete_email",
-      "clawmail_trash_email",
-      "clawmail_empty_trash"
+      "clawmailreader_send_email",
+      "clawmailreader_send_draft",
+      "clawmailreader_delete_email",
+      "clawmailreader_trash_email",
+      "clawmailreader_empty_trash"
     ]
   }
 }

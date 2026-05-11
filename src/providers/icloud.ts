@@ -9,7 +9,7 @@ type AppendResult = { uid?: number };
 
 export class ICloudProvider implements EmailProvider {
   private async connect(account: Account) {
-    const client = new ImapFlow({ host: process.env.CLAWMAIL_ICLOUD_HOST ?? "imap.mail.me.com", port: Number(process.env.CLAWMAIL_ICLOUD_PORT ?? 993), secure: true, auth: { user: account.email, pass: await requireSecret(account.id, "icloud_app_password") }, logger: false });
+    const client = new ImapFlow({ host: process.env.CLAWMAILREADER_ICLOUD_HOST ?? "imap.mail.me.com", port: Number(process.env.CLAWMAILREADER_ICLOUD_PORT ?? 993), secure: true, auth: { user: account.email, pass: await requireSecret(account.id, "icloud_app_password") }, logger: false });
     await client.connect();
     return client;
   }
@@ -60,12 +60,12 @@ export class ICloudProvider implements EmailProvider {
   }
 
   async archiveMessage(account: Account, messageId: string): Promise<MessageSummary> {
-    return this.moveMessage(account, messageId, process.env.CLAWMAIL_ICLOUD_ARCHIVE_MAILBOX ?? "Archive");
+    return this.moveMessage(account, messageId, process.env.CLAWMAILREADER_ICLOUD_ARCHIVE_MAILBOX ?? "Archive");
   }
 
   async createDraft(account: Account, draft: DraftInput): Promise<Draft> {
     return this.withClient(account, async (client) => {
-      const mailbox = process.env.CLAWMAIL_ICLOUD_DRAFTS_MAILBOX ?? "Drafts";
+      const mailbox = process.env.CLAWMAILREADER_ICLOUD_DRAFTS_MAILBOX ?? "Drafts";
       const result = await client.append(mailbox, Buffer.from(buildMimeMessage(draft)), ["Draft"]) as false | AppendResult;
       const id = `${mailbox}:${result && result.uid ? result.uid : Date.now()}`;
       const created = { id, messageId: id, accountId: account.id };

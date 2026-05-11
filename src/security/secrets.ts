@@ -1,6 +1,6 @@
 import keytar from "keytar";
 
-const service = "clawmail";
+const service = "clawmailreader";
 
 export async function getSecret(accountId: string, name: string) {
   return keytar.getPassword(service, `${accountId}:${name}`);
@@ -12,7 +12,7 @@ export async function setSecret(accountId: string, name: string, value: string) 
 
 export function envSecret(accountId: string, name: string) {
   const normalized = `${accountId}_${name}`.replace(/[^a-zA-Z0-9]/g, "_").toUpperCase();
-  return process.env[`CLAWMAIL_${normalized}`];
+  return process.env[`CLAWMAILREADER_${normalized}`];
 }
 
 export async function requireSecret(accountId: string, name: string) {

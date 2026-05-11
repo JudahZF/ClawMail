@@ -26,13 +26,17 @@ export const draftSchema = accountIdSchema.extend({
 });
 
 export const toolSchemas = {
-  clawmail_list_accounts: z.object({}).optional(),
-  clawmail_list_folders: listFoldersSchema,
-  clawmail_create_folder: createFolderSchema,
-  clawmail_search_email: searchEmailSchema,
-  clawmail_get_email: getEmailSchema,
-  clawmail_move_email: moveEmailSchema,
-  clawmail_archive_email: archiveEmailSchema,
-  clawmail_create_draft: draftSchema.omit({ draftId: true }),
-  clawmail_update_draft: draftSchema.required({ draftId: true }),
+  clawmailreader_list_accounts: z.object({}),
+  clawmailreader_list_folders: listFoldersSchema,
+  clawmailreader_create_folder: createFolderSchema,
+  clawmailreader_search_email: searchEmailSchema,
+  clawmailreader_get_email: getEmailSchema,
+  clawmailreader_move_email: moveEmailSchema,
+  clawmailreader_archive_email: archiveEmailSchema,
+  clawmailreader_create_draft: draftSchema.omit({ draftId: true }),
+  clawmailreader_update_draft: draftSchema.required({ draftId: true }),
 };
+
+export const toolJsonSchemas = Object.fromEntries(
+  Object.entries(toolSchemas).map(([name, schema]) => [name, z.toJSONSchema(schema)]),
+) as Record<keyof typeof toolSchemas, unknown>;

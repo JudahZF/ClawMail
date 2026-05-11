@@ -2,6 +2,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { manifest } from "../src/manifest.js";
+import { toolJsonSchemas } from "../src/schemas/tools.js";
 
 async function files(dir: string): Promise<string[]> {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -15,16 +16,29 @@ async function files(dir: string): Promise<string[]> {
 describe("safety boundary", () => {
   it("publishes only safe tool contracts", () => {
     expect(manifest.contracts.tools).toEqual([
-      "clawmail_list_accounts",
-      "clawmail_list_folders",
-      "clawmail_create_folder",
-      "clawmail_search_email",
-      "clawmail_get_email",
-      "clawmail_move_email",
-      "clawmail_archive_email",
-      "clawmail_create_draft",
-      "clawmail_update_draft",
+      "clawmailreader_list_accounts",
+      "clawmailreader_list_folders",
+      "clawmailreader_create_folder",
+      "clawmailreader_search_email",
+      "clawmailreader_get_email",
+      "clawmailreader_move_email",
+      "clawmailreader_archive_email",
+      "clawmailreader_create_draft",
+      "clawmailreader_update_draft",
     ]);
+  });
+
+  it("keeps the published OpenClaw manifest in sync with the runtime manifest", async () => {
+    const published = JSON.parse(await readFile("openclaw.plugin.json", "utf8"));
+
+    expect(published).toEqual(manifest);
+  });
+
+  it("registers JSON Schema tool inputs rather than runtime validator objects", () => {
+    for (const schema of Object.values(toolJsonSchemas)) {
+      expect(schema).toMatchObject({ type: "object" });
+      expect(schema).not.toHaveProperty("parse");
+    }
   });
 
   it("provider implementations do not contain risky provider calls", async () => {

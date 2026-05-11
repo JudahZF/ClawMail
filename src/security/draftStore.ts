@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 
-const path = process.env.CLAWMAIL_DRAFT_STORE ?? ".clawmail/drafts.json";
+const path = process.env.CLAWMAILREADER_DRAFT_STORE ?? ".clawmailreader/drafts.json";
 
 type DraftRecord = { accountId: string; provider: string; draftId: string; messageId?: string; createdAt: string; updatedAt: string };
 
@@ -33,6 +33,6 @@ export async function rememberDraft(record: Omit<DraftRecord, "createdAt" | "upd
 export async function assertDraftOwned(accountId: string, draftId: string) {
   const store = await load();
   if (!store.drafts.some((draft) => draft.accountId === accountId && draft.draftId === draftId)) {
-    throw new Error(`Draft '${draftId}' was not created by clawmail for account '${accountId}'`);
+    throw new Error(`Draft '${draftId}' was not created by clawmailreader for account '${accountId}'`);
   }
 }

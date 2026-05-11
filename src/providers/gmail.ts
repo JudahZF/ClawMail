@@ -9,7 +9,7 @@ export class GmailProvider implements EmailProvider {
     const auth = new google.auth.OAuth2(
       await requireSecret(account.id, "gmail_client_id"),
       await requireSecret(account.id, "gmail_client_secret"),
-      process.env.CLAWMAIL_GMAIL_REDIRECT_URI ?? "http://localhost",
+      process.env.CLAWMAILREADER_GMAIL_REDIRECT_URI ?? "http://localhost",
     );
     auth.setCredentials({ refresh_token: await requireSecret(account.id, "gmail_refresh_token") });
     return google.gmail({ version: "v1", auth });

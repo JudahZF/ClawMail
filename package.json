@@ -1,12 +1,12 @@
 {
-  "name": "clawmail",
+  "name": "clawmailreader",
   "version": "1.0.0",
   "description": "Secure OpenClaw email plugin for read, organize, and draft-only workflows.",
   "type": "module",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "bin": {
-    "clawmail": "dist/src/cli.js"
+    "clawmailreader": "dist/src/cli.js"
   },
   "scripts": {
     "check": "tsc --noEmit",
@@ -18,14 +18,15 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@codeberg.org/JudahZF/clawmail.git"
+    "url": "git+ssh://git@codeberg.org/JudahZF/clawmailreader.git"
   },
   "bugs": {
-    "url": "https://codeberg.org/JudahZF/clawmail/issues"
+    "url": "https://codeberg.org/JudahZF/clawmailreader/issues"
   },
-  "homepage": "https://codeberg.org/JudahZF/clawmail",
+  "homepage": "https://codeberg.org/JudahZF/clawmailreader",
   "files": [
     "dist/src",
+    "openclaw.plugin.json",
     "README.md",
     "LICENSE"
   ],
