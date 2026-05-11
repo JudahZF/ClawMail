@@ -11,3 +11,4 @@ out/
 .env.*
 !.env.example
 clawmail*.tgz
+JudahZF-clawmailreader*.tgz

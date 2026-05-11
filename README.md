@@ -45,12 +45,7 @@ Create `clawmailreader.config.json` or set `CLAWMAILREADER_CONFIG`:
 
 ## Secrets
 
-Secrets are read from the OS keychain first, with environment variable overrides supported. Store keychain secrets with:
-
-```sh
-pnpm build
-clawmailreader set-secret <account-id> <secret-name> <value>
-```
+OS keychain storage is not used. Follow OpenClaw's recommended secrets flow: keep secret values out of plugin config and expose them through OpenClaw SecretRefs, typically with the `env` provider. This plugin reads the resolved environment variables named below.
 
 Common secret names:
 
@@ -85,7 +80,7 @@ Required delegated scopes:
 
 Use an Apple app-specific password. IMAP defaults to `imap.mail.me.com:993`.
 
-## Environment secret override format
+## Environment secret format
 
 ```sh
 CLAWMAILREADER_<ACCOUNT_ID>_<SECRET_NAME>=...
@@ -93,7 +88,26 @@ CLAWMAILREADER_<ACCOUNT_ID>_<SECRET_NAME>=...
 
 Non-alphanumeric characters in the account id or secret name are converted to underscores and uppercased.
 
-Example:
+Example SecretRef-backed env provider value:
+
+```json5
+{
+  secrets: {
+    providers: {
+      default: { source: "env" }
+    }
+  },
+  plugins: {
+    entries: {
+      clawmailreader: {
+        config: { accounts: [/* ... */] }
+      }
+    }
+  }
+}
+```
+
+Then provide the corresponding environment variable to the OpenClaw runtime:
 
 ```sh
 CLAWMAILREADER_PERSONAL_GMAIL_GMAIL_REFRESH_TOKEN=...
